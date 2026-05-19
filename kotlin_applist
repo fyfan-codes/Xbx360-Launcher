@@ -1,0 +1,13 @@
+fun getInstalledApps(context: Context): List<AppInfo> {
+    val pm = context.packageManager
+    val intent = Intent(Intent.ACTION_MAIN, null).addCategory(Intent.CATEGORY_LAUNCHER)
+    val resolveInfos = pm.queryIntentActivities(intent, 0)
+    
+    return resolveInfos.map { resolveInfo ->
+        AppInfo(
+            label = resolveInfo.loadLabel(pm).toString(),
+            packageName = resolveInfo.activityInfo.packageName,
+            icon = resolveInfo.loadIcon(pm)
+        )
+    }
+}
