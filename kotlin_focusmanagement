@@ -1,0 +1,18 @@
+@Composable
+fun AppTile(app: AppInfo, context: Context) {
+    var isFocused by remember { mutableStateOf(false) }
+    
+    Box(
+        modifier = Modifier
+            .size(100.dp)
+            .onFocusChanged { isFocused = it.isFocused }
+            .scale(if (isFocused) 1.1f else 1.0f) // Pop-out effect on focus
+            .border(if (isFocused) 4.dp else 0.dp, Color.White)
+            .clickable { 
+                val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)
+                context.startActivity(launchIntent)
+            }
+    ) {
+        Image(app.icon.toBitmap().asImageBitmap(), contentDescription = app.name)
+    }
+}
