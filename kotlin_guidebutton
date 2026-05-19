@@ -1,0 +1,4 @@
+BackHandler {
+    // Show Xbox Guide Menu Overlay instead of closing
+    showGuideOverlay = true
+}
