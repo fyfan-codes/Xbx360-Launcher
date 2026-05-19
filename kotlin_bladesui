@@ -1,0 +1,31 @@
+@Composable
+fun XboxDashboard(apps: List<AppInfo>) {
+    val pagerState = rememberPagerState(pageCount = { 5 }) // Social, Game, Home, Settings, etc.
+    val xboxGreen = Color(0xFF107C10)
+
+    Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
+        HorizontalPager(
+            state = pagerState,
+            pageSpacing = (-20).dp, // This causes the "Blade Overlap"
+            modifier = Modifier.fillMaxSize()
+        ) { pageIndex ->
+            BladePage(pageIndex, apps)
+        }
+    }
+}
+
+@Composable
+fun BladePage(index: Int, apps: List<AppInfo>) {
+    // Each blade has a specific color/content
+    val colors = listOf(Color.Blue, Color.Green, Color.Gray, Color.White, Color.Red)
+    
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 40.dp) // Leave space for the previous blade edge
+            .background(colors[index % colors.size])
+    ) {
+        Text("Blade Name", fontSize = 30.sp, color = Color.White)
+        // Add your Grid of Apps here
+    }
+}
