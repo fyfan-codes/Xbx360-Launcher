@@ -1,0 +1,2 @@
+val typeface = ResourcesCompat.getFont(context, R.font.X360.ttf)
+textView.typeface = typeface
